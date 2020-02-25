@@ -1,5 +1,5 @@
 == NZTrain
-Status: {<img src="https://secure.travis-ci.org/NZOI/nztrain.png?branch=master" alt="Build Status" />}[http://travis-ci.org/NZOI/nztrain] {<img src="https://coveralls.io/repos/NZOI/nztrain/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/NZOI/nztrain] {<img src="https://codeclimate.com/github/NZOI/nztrain.png" />}[https://codeclimate.com/github/NZOI/nztrain]
+{<img src="https://travis-ci.org/NZOI/nztrain.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/NZOI/nztrain] {<img src="https://coveralls.io/repos/github/NZOI/nztrain/badge.svg?branch=master" alt="Coverage Status" />}[https://coveralls.io/github/NZOI/nztrain?branch=master] {<img src="https://api.codeclimate.com/v1/badges/cc7e1f452944578e5286/maintainability" />}[https://codeclimate.com/github/NZOI/nztrain/maintainability]
 
 === Installation
 Run `script/install.bash` to install dependencies.
