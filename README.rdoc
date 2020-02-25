@@ -1,6 +1,5 @@
 == NZTrain
 Status: {<img src="https://secure.travis-ci.org/NZOI/nztrain.png?branch=master" alt="Build Status" />}[http://travis-ci.org/NZOI/nztrain] {<img src="https://coveralls.io/repos/NZOI/nztrain/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/NZOI/nztrain] {<img src="https://codeclimate.com/github/NZOI/nztrain.png" />}[https://codeclimate.com/github/NZOI/nztrain]
-Workflow: {<img src="https://badge.waffle.io/NZOI/nztrain.png" alt="WIP Issues" />}[http://waffle.io/NZOI/nztrain]
 
 === Installation
 Run `script/install.bash` to install dependencies.
