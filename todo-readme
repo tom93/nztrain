@@ -1,0 +1,21 @@
+# Feedback
+
+split minor README updates, rewritten manual installation instructions, and Docker into separate PRs
+
+I think the original version ("Use 'spring' instead of 'bundle exec'")
+was accurate, why change it to "Use 'spring' instead of bundle"?
+Example: `bundle exec rails server` becomes `spring rails server`.
+
+-Both the installation and update script depends
++Both the installation and update scripts depend
+
+Awkward wording:
+-then new configurations will be prompted.
++then the scripts will prompt for the new configurations.
+
+# My own changes
+
+installation steps:
+ - reset_password... or puts "ERROR:", user.errors.full_messages
+
+convert to Markdown?

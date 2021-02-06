@@ -1,0 +1,13 @@
+sudo -u deploy -i
+cd /apps/train.nzoi.org.nz/current/
+git fetch
+git status --untracked-files=no
+git diff HEAD @{u}
+git merge --ff-only @{u}
+# bundle install
+# RAILS_ENV=production bundle exec rake db:seed
+# RAILS_ENV=production bundle exec rake assets:precompile
+# bundle exec passenger-config restart-app /
+# sudo systemctl restart qless.service
+# sudo systemctl restart nginx.service
+exit

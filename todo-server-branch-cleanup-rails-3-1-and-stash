@@ -1,0 +1,7 @@
+server/rails.3.1:
+only on server, is not merged into master, some of the changes are merged
+verify that there are no important changes in rails.3.1 but not in master
+start by merging commit bbc0693 from master into rails.3.1
+
+server/refs/stash (tagged locally as server-refs-stash):
+investigate and drop

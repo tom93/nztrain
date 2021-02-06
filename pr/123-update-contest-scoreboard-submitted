@@ -1,0 +1,94 @@
+(Preliminary feedback.)
+
+Is this PR intended to be squashed, or merged with the commit history? If we are keeping the history I'd like to clean it up (squash fixes, fix spelling in commit messages, and insert my commits from #117 and #118).
+
+> default of 3 hours
+
+Setting the default time saves some hassle in the common case, but I prefer leaving the default blank so the user can't forget to set it. I don't create a lot of contests though, so I might not be the best judge.
+(Ideally the field should be validated for presence, along with most of the other fields; but that belongs in a separate PR. I added it to my todo -- and also to fix crash that currently occurs if validation fails, e.g. when the name is blank...)
+
+in views/contests:
+I believe "Protected" and "Private" actually have the same behaviour at the moment (#107). I suggest we document the current behaviour and mention that it may be changed in the future, e.g.
+
+```html
+        <li>Public: Anyone can see the contest.</li>
+        <li>Protected: Only those who can join the contest can see the contest.</li>
+        <li>Private: Currently this is the same as "Protected", but this may be changed in future.</li>
+```
+
+```suggestion
+    <%= f.label :live_scoreboard %>Show the scoreboard during the contest. If unchecked, users can only see their own score until the end of the contest.<br />
+```
+(I think the imperative mood is more conventional for checkboxes -- "Show" instead of "If checked". This help text is shown to the admin user creating the contest, so I think the pronoun "you" is confusing.)
+
+```suggestion
+    <%= f.label :show_unofficial_contestants %>Exclude unofficial contestants from ranking. An official contestant is any student enrolled in a NZ school.<br />
+```
+(Imperative mood. Fix spelling.)
+
+I don't like the name `show_unofficial_contestants`. I think the name implies that setting this to false would completely hide unofficial contestants from the scoreboard, but really this will still display them, just without a rank (though it does add a toggle to hide them).
+How about  `only_rank_official_contestants`? Or something like `distinguish_official_contestants`?
+
+> " - If checked, unofficial contestants are not ranked. An offical contestant is any student enrolled in a NZ school."
+
+```suggestion
+    <%= f.label :show_unofficial_contestants %>Exclude unofficial contestants from ranking. An official contestant is any student enrolled in an NZ school.<br />
+```
+(Imperative mood. Fix spelling. Change "a NZ school" to "a*n* NZ school".)
+
+> <% elsif !show_scoreboard && (!user_signed_in? || !@contest.has_competitor?(current_user)) %>
+
+Would it be clearer if the negation was factored out?
+```suggestion
+<% elsif !(show_scoreboard || (user_signed_in? && @contest.has_competitor?(current_user))) %>
+```
+I think this makes it slightly clearer that the `else` part (which displays the scoreboard) will be executed if show_scoreboard is true or the user is competing.
+
+> record.user && record.user.id != current_user.id
+
+This inherits the bug fixed by #117 (deleted users will be shown to signed-in users when the scoreboard is not live). I'd also like to refactor as in #118, i.e.
+```suggestion
+        <% next unless show_scoreboard || (user_signed_in? && record.user && record.user.id == current_user.id) # hide row unless permitted to view %>
+```
+(Might be worth saving `user_signed_in? && record.user && record.user.id == current_user.id` in a variable, because it's also used below.)
+
+> rank = index + 1 - num_unofficial unless ...
+
+I think there is a bug here. I haven't tested it, but I'm pretty sure the following scoreboard will trigger it:
+
+| Rank | User           | Score |
+|------|----------------|------:|
+| 1    | A              | 100   |
+| -    | B (unofficial) | 90    |
+| 2    | C              | 90    |
+
+I'm pretty sure the rank of user C will be (incorrectly) displayed as 1, because the rank isn't updated when the score is equal to the previous score.
+
+How about:
+
+```erb
+# before loop
+      <% num_ranked = 0 %>
+      <% rank = nil %>
+      <% previous_record = nil %>
+# in loop
+          <% if is_ranked %>
+            <% num_ranked += 1 %>
+            <% rank = num_ranked unless previous_record && previous_record.score == record.score && previous_record.time_taken == record.time_taken %>
+            <% previous_record = record %>
+          <% end %>
+```
+
+> rank unless is_unofficial || !show_scoreboard
+
+With the previous suggestion, this would become `rank if is_ranked && show_scoreboard`.
+
+> toggle_unofficial
+
+Missing `var`.
+
+Missing `;`
+
+> migration
+
+Shouldn't `user.save` be `user.save!` to fail loudly on errors?

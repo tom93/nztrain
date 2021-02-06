@@ -1,0 +1,5 @@
+Can we please disable the option "Dismiss stale pull request approvals when new commits are pushed"?
+<https://help.github.com/en/github/administering-a-repository/enabling-required-reviews-for-pull-requests>
+It's really annoying for dependent pull requests, since later PRs will typically have spurious merge conflicts and resolving them dismisses the review.
+(It's also annoying when we need to manually trigger a Travis CI build by force-pushing, as happened recently.)
+We'll need to trust people to act responsibly: if they push substantive changes, they should either manually dismiss the review (<https://github.blog/2016-10-12-dismissing-reviews-on-pull-requests/>) or ask the reviewer to look at the new changes and wait for a response before merging.

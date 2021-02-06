@@ -1,0 +1,14 @@
+todo:
+
+check that `policy(@contest).inspect?` works when not signed in (and also in general test that scoreboard works)
+
+checkbox for unofficials: does <label> element enclose <input> to make entire thing clickable?
+
+history rewrite:
+commit message:
+"publiclly." => "publicly"
+body =>
+Previously student results were only shown on the public scoreboard if
+equal to or better than the median score.
+
+check that deleted contest info page isn't important

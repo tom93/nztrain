@@ -1,0 +1,32 @@
+spelling of PR title
+commit message:
+"publiclly." => "publicly"
+Previously student results were only shown on the public scoreboard if
+equal to or better than the median score.
+
+
+Other changes in that PR:
+
+reword/reformat contest view
+
+check that deleted page isn't important
+
+
+Posted:
+
+> protected/private description
+
+As far as I can tell, setting the contest observation to "private" actually the same effect as "protected".
+The field was added in commit fb341af with the comment
+> for observers: public (everyone), protected (groups it is added to even if not competing), private (only if competing)
+The logic was added in commit b298d94, and only checks if the field is set to "public"; otherwise the behaviour matches the description of "protected".
+I don't think "private" is useful. It *almost* helps with an issue discussed in chat:
+> users that start later have a slight advantage in terms of information, since they are able to see which problems/subtasks have been solved by more users
+However, to solve this issue "private" would need to only show the scoreboard *after* the user finished competing (as opposed to during).
+I don't think it makes sense to use the observation field for that. I suggest that we combine "private" and "protected" into a single option called "private" with the current behaviour for non-public contests, and use separate options (like the "live scoreboard" option suggested in this PR) to control whether individual problem scores are shown.
+
+Related: Filelinks also have public/protected/private visibility, where "protected" means the user can view the file if *not* competing. I don't understand why that is; see issue #106.
+
+> default of 3 hours
+Setting the default time saves some hassle in the common case, but I prefer leaving the default blank so the user can't forget to set it.
+(Ideally the field should be validated for presence, along with most of the other fields; but that belongs in a separate PR. I added it to my todo -- and also to fix crash that currently occurs if validation fails, e.g. because the name is blank...)
