@@ -5,15 +5,17 @@ SimpleCov::Formatter::LcovFormatter.config.single_report_path = 'coverage/lcov.i
 SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
 SimpleCov.start 'rails'
 
-puts "XXX RAILS_ENV=#{ENV["RAILS_ENV"].inspect}, Rails.env=#{Rails.env.inspect}"
+puts "XXX RAILS_ENV=#{ENV["RAILS_ENV"].inspect}"
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+#ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/email/rspec'
 require "pundit/rspec"
+
+puts "XXX Rails.env=#{Rails.env.inspect}"
 
 # include seeds
 require "#{Rails.root}/db/seeds.rb"
