@@ -5,6 +5,8 @@ SimpleCov::Formatter::LcovFormatter.config.single_report_path = 'coverage/lcov.i
 SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
 SimpleCov.start 'rails'
 
+puts "XXX RAILS_ENV=#{ENV["RAILS_ENV"].inspect}, Rails.env=#{Rails.env.inspect}"
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
