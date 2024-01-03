@@ -37,7 +37,7 @@ jobs:
         with:
           bundler-cache: true
 
-      - run: bash script/install/config.bash --defaults
+      - run: AUTOCONFIRM=true bash script/install/config.bash --defaults
         env:
           DATABASE_INSTALL: false
           DATABASE_USERNAME: postgres
@@ -50,7 +50,7 @@ jobs:
           ISOLATE_CGROUPS: false
           ISOLATE_BRANCH: master
 
-      - run: AUTOCONFIRM=true script/install.bash --skip-update
+      - run: yes | AUTOCONFIRM=true script/install.bash --skip-update
         env:
           PGHOST: localhost
           PGUSER: postgres
