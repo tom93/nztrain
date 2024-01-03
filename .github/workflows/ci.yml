@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - run: apt-get update
-      - run: apt-get install -y 'libyaml-0-[0-9]+' libssl1.1 ca-certificates # for ruby/setup-ruby
+      - run: apt-get install -y 'libyaml-0-[0-9]+' libssl1.1 ca-certificates git # for ruby/setup-ruby
 
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
