@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - run: apt-get update
-      - run: apt-get install -y 'libyaml-0-[0-9]+' libssl1.1 ca-certificates git build-essential # for ruby/setup-ruby
+      - run: apt-get install -y 'libyaml-0-[0-9]+' libssl1.1 ca-certificates git build-essential libgmp-dev zlib1g-dev libpq-dev libmagickwand-dev # for ruby/setup-ruby and 'bundle install'
 
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
