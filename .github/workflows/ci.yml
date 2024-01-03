@@ -29,6 +29,8 @@ jobs:
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432"
 
     steps:
+      - run: apt-get install -y libyaml-0
+
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
