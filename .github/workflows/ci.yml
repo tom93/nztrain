@@ -30,8 +30,9 @@ jobs:
 
     steps:
       - run: apt-get update
-      - run: apt-get install libyaml-0 || echo fail
       - run: apt-get install -y 'libyaml-0-[0-9]+'
+      - run: dpkg -l | grep ssl; apt-cache search '^libssl'
+      - run: apt-get install -y libssl1.1
 
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
