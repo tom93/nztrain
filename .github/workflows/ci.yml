@@ -40,8 +40,8 @@ jobs:
         with:
           key: apt-cache-${{ runner.os }}
           path: |
-            /var/lib/apt/lists
-            /var/cache/apt/archives
+            /var/lib/apt/lists/*.*
+            /var/cache/apt/archives/*.deb
 
       - run: bash script/install/config.bash --defaults
         env:
