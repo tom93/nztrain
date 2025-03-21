@@ -30,11 +30,7 @@ jobs:
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432"
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
+      - run: id; ls -l /var/cache/apt/lists; apt install -y nano ||true; sudo id ||true
       - name: Cache apt packages
         uses: actions/cache@v4
         with:
@@ -42,6 +38,11 @@ jobs:
           path: |
             /var/lib/apt/lists/*.*
             /var/cache/apt/archives/*.deb
+
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
       - run: bash script/install/config.bash --defaults
         env:
