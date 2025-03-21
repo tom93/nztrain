@@ -30,7 +30,7 @@ jobs:
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432"
 
     steps:
-      - run: id; ls -l /var/cache/apt/lists; apt install -y nano ||true; sudo id ||true
+      - run: id; ls -l /var/lib/apt/lists /var/cache/apt ||true; apt install -y nano ||true; sudo id ||true
       - name: Cache apt packages
         uses: actions/cache@v4
         with:
