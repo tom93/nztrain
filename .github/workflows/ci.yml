@@ -45,6 +45,7 @@ jobs:
             if [ -d ~/apt-cache/archives ]; then sudo mv ~/apt-cache/archives/* /var/cache/apt/archives/; fi
             rm -r ~/apt-cache
           fi
+          touch ~/apt-cache-timestamp
 
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -87,8 +88,8 @@ jobs:
         run: |
           # TODO WIP (should only export new files)
           mkdir ~/apt-cache ~/apt-cache/lists ~/apt-cache/archives
-          sudo ln -t ~/apt-cache/lists /var/lib/apt/lists/*
-          sudo ln -t ~/apt-cache/archives /var/cache/apt/archives/*.deb
+          sudo find /var/lib/apt/lists/ -maxdepth 1 -type f -cnewer ~/apt-cache-timestamp -execdir ln -t ~/apt-cache/lists/ {} +
+          sudo find /var/cache/apt/archives/ -maxdepth 1 -type f -cnewer ~/apt-cache-timestamp -execdir ln -t ~/apt-cache/archives/ {} +
 
   lint:
     runs-on: ubuntu-20.04
