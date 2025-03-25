@@ -87,8 +87,8 @@ jobs:
         run: |
           # TODO WIP (should only export new files)
           mkdir ~/apt-cache ~/apt-cache/lists ~/apt-cache/archives
-          ln -t ~/apt-cache/lists /var/lib/apt/lists/*
-          ln -t ~/apt-cache/archives /var/cache/apt/archives/*.deb
+          sudo ln -t ~/apt-cache/lists /var/lib/apt/lists/*
+          sudo ln -t ~/apt-cache/archives /var/cache/apt/archives/*.deb
 
   lint:
     runs-on: ubuntu-20.04
