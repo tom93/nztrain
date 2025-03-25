@@ -40,9 +40,11 @@ jobs:
       - name: Import apt package cache
         run: |
           # TODO WIP
-          if [ -d ~/apt-cache/lists ]; then sudo mv ~/apt-cache/lists/* /var/lib/apt/lists/; fi
-          if [ -d ~/apt-cache/archives ]; then sudo mv ~/apt-cache/archives/* /var/cache/apt/archives/; fi
-          rm -r ~/apt-cache
+          if [ -d ~/apt-cache ]; then
+            if [ -d ~/apt-cache/lists ]; then sudo mv ~/apt-cache/lists/* /var/lib/apt/lists/; fi # TODO: handle empty dir (also below)
+            if [ -d ~/apt-cache/archives ]; then sudo mv ~/apt-cache/archives/* /var/cache/apt/archives/; fi
+            rm -r ~/apt-cache
+          fi
 
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -83,7 +85,7 @@ jobs:
 
       - name: Export apt package cache
         run: |
-          # TODO WIP
+          # TODO WIP (should only export new files)
           mkdir ~/apt-cache ~/apt-cache/lists ~/apt-cache/archives
           ln -t ~/apt-cache/lists /var/lib/apt/lists/*
           ln -t ~/apt-cache/archives /var/cache/apt/archives/*.deb
